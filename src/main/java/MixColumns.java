@@ -56,7 +56,7 @@ public class MixColumns {
         }
     }
     public static String hexToBinary(String hex) {
-        int i = Integer.parseInt(hex, 16);
+        int i = Integer.parseInt(hex.toLowerCase(), 16);
         String bin = Integer.toBinaryString(i);
         while (bin.length()<8){
             bin="0"+bin;
@@ -68,7 +68,7 @@ public class MixColumns {
     public static String binaryToHexString(String binary) {
         int decimal = Integer.parseInt(binary,2);
         String hexStr = Integer.toString(decimal,16);
-        return hexStr;
+        return hexStr.toUpperCase();
     }
 
 

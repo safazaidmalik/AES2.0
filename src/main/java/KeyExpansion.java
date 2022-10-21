@@ -127,7 +127,8 @@ public class KeyExpansion {
         return ret_str;
     }
     public static String hexToBinary(String hex) {
-        int i = Integer.parseInt(hex, 16);
+        //System.out.println("Hex = " + hex);
+        int i = Integer.parseInt(hex.toLowerCase(), 16);
         String bin = Integer.toBinaryString(i);
         while (bin.length()<8){
             bin="0"+bin;
@@ -154,7 +155,8 @@ public class KeyExpansion {
     public static String binaryToHexString(String binary) {
         int decimal = Integer.parseInt(binary,2);
         String hexStr = Integer.toString(decimal,16);
-        return hexStr;
+        //System.out.println("Binary To Hexa= " + hexStr.toUpperCase());
+        return hexStr.toUpperCase();
     }
 
     public static Hexa [] XOR(Hexa[] word1, Hexa[] word2){
@@ -243,6 +245,8 @@ public class KeyExpansion {
                 w_ = w_r;
             }
             i++;
+            System.out.println("Key after Round " + String.valueOf(i));
+            displayHexMatrix(expandedKey[i],4,4);
 
         } // end while
         return expandedKey;
@@ -253,8 +257,8 @@ public class KeyExpansion {
     public static void main(String []  args){
 
         KeyExpansion ke = new KeyExpansion(128);
-        Hexa[][][] expanded_key = ke.KeyExpansionAlgo(StringToHexaArr("00000000000000000000000000000000", 4, 4));
-        displayExpandedKey(expanded_key, 11, 4, 4);
+        Hexa[][][] expanded_key = ke.KeyExpansionAlgo(StringToHexaArr("2B7E151628AED2A6ABf7158809CF4F3C", 4, 4));
+        //displayExpandedKey(expanded_key, 11, 4, 4);
        /* System.out.println("Display before: ");
         Hexa[] hex = StringToHexa("7D5ACB46");
         displayHexWord(hex);
