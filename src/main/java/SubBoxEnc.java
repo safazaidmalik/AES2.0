@@ -857,4 +857,18 @@ public class SubBoxEnc {
 
         return subValues;
     }
+    public void displaySubBox(){
+        SubBoxEnc sb = new SubBoxEnc();
+        sb.setsBox();
+        for(int i =0; i < 16 ; i++){
+            for(int j = 0; j < 16; j++){
+                System.out.print(sb.sBox[i][j].firstChar+""+ sb.sBox[i][j].secondChar+ " ");
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String [] args){
+        SubBoxEnc sb = new SubBoxEnc();
+        sb.displaySubBox();
+    }
 }

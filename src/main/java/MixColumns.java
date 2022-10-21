@@ -1,8 +1,8 @@
 import static java.lang.String.valueOf;
 
 public class MixColumns {
-    private static String enc_matrix= "02010103030201010103020101010302";
-    private static String dec_matrix= "0E0B0D09090E0B0D0D090E0B0B0D090E";
+    public static final String enc_matrix= "02010103030201010103020101010302";
+    public static final String dec_matrix= "0E0B0D09090E0B0D0D090E0B0B0D090E";
 
     public static Hexa[][] StringToHexa(String str, int rows, int columns){
         Hexa hex_mat[][] = new Hexa[4][4];
@@ -25,9 +25,15 @@ public class MixColumns {
 
     public static Hexa oneStringToHexa(String str){
         Hexa hex_ret = new Hexa();
-        int offset = 0;
-        hex_ret.firstChar = str.charAt(offset++);
-        hex_ret.secondChar = str.charAt(offset++);
+        if(str.length()>1) {
+            int offset = 0;
+            hex_ret.firstChar = str.charAt(offset++);
+            hex_ret.secondChar = str.charAt(offset++);
+        }
+        else{
+            hex_ret.firstChar = '0';
+            hex_ret.secondChar = str.charAt(0);
+        }
         return hex_ret;
     }
 
@@ -74,11 +80,11 @@ public class MixColumns {
                 String binary_results = "";
                 for (int k = 0; k < c1; k++) {
                     if (k == 0){
-                        System.out.println("Hex To Binary = "+ hexToBinary(HextoString(mix_matrix[i][k]))+ " and "+ hexToBinary(HextoString(state_matrix[k][j])));
+                        //System.out.println("Hex To Binary = "+ hexToBinary(HextoString(mix_matrix[i][k]))+ " and "+ hexToBinary(HextoString(state_matrix[k][j])));
                         binary_results = gf.GaloisMultiplication(hexToBinary(HextoString(mix_matrix[i][k])),hexToBinary(HextoString(state_matrix[k][j])));
                     }
                     else {
-                        System.out.println("Hex To Binary = "+ hexToBinary(HextoString(mix_matrix[i][k]))+ " and "+ hexToBinary(HextoString(state_matrix[k][j])));
+                        //System.out.println("Hex To Binary = "+ hexToBinary(HextoString(mix_matrix[i][k]))+ " and "+ hexToBinary(HextoString(state_matrix[k][j])));
                         binary_results = gf.XOR_Func(binary_results, GaloisFields.GaloisMultiplication(hexToBinary(HextoString(mix_matrix[i][k])), hexToBinary(HextoString(state_matrix[k][j]))));
                     }
                 }

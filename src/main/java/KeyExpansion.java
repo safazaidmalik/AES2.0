@@ -158,9 +158,9 @@ public class KeyExpansion {
     }
 
     public static Hexa [] XOR(Hexa[] word1, Hexa[] word2){
-        if(flag == true){
-            System.out.println("Hellow");
-        }
+        /*if(flag == true){
+            //System.out.println("Hellow");
+        }*/
         Hexa [] newWord = new Hexa[word1.length];
         for(int i = 0; i < word1.length; i++){
             newWord[i] = new Hexa();
@@ -181,7 +181,7 @@ public class KeyExpansion {
         for(int i = 0; i < word_copy.length ; i++){
             resultant[i] = new Hexa();
             if (i == 0){
-                System.out.println("XORING = "+HextoString(word_copy[i])+ " and "+ HextoString(rCon));
+                //System.out.println("XORING = "+HextoString(word_copy[i])+ " and "+ HextoString(rCon));
                 resultant[i] = oneStringToHexa(binaryToHexString(XOR_Func(hexToBinary(HextoString(word_copy[i])),hexToBinary(HextoString(rCon)))));
             }
             else{
@@ -192,6 +192,15 @@ public class KeyExpansion {
 
         return resultant;
     }
+    public static void displayHexMatrix(Hexa[][] hex_matrix, int rows, int cols){
+        for (int i=0; i < rows; i++) {
+            for (int j=0; j < cols; j++) {
+
+                System.out.print(hex_matrix[i][j].firstChar +" "+ hex_matrix[i][j].secondChar + " ");
+            }
+            System.out.println ();
+        }
+    }
 
     public Hexa[][][] KeyExpansionAlgo(Hexa[][] orignalKey){
 
@@ -200,36 +209,31 @@ public class KeyExpansion {
         expandedKey[i]= orignalKey;
         //i++;
         while (i < (Nr)) {
-
-            if( i == 1){
-                System.out.println("hello");
-            }
+            System.out.println("Key after Round " + String.valueOf(i));
+            displayHexMatrix(expandedKey[i],4,4);
             Hexa[] curr_col = new Hexa[Nb];
             for (int j = 0; j < Nb ; j++){
                     curr_col[j] = expandedKey[i][j][Nb-1];
                 }
             //Round Shift
             Hexa[]  shiftedCol = roundShift(curr_col);
-            System.out.println("After Round Shift:");
-            displayHexWord(shiftedCol);
+
             //Substitute Bytes
             Hexa[] substituted_col = SubBytes(shiftedCol);
-            System.out.println("After Sub Columns:");
-            displayHexWord(substituted_col);
+
 
             //Xor with RCon
             Hexa [] rcj = XorRCon(substituted_col,oneStringToHexa(RCON[i]));
             Hexa [] w_ = rcj;
-            System.out.println("After XOR RCon:");
-            displayHexWord(w_);
+
             //XOR w_prime with all columns
             for(int l = 0; l < Nb; l++){
                 Hexa [] w_1 = new Hexa[Nb];
                 for(int m = 0; m < Nb; m++){
                     w_1[m] = expandedKey[i][m][l];
                 }
-                System.out.println(":");
-                displayHexWord(shiftedCol);
+                //System.out.println(":");
+
 
                 Hexa w_r[] = XOR(w_,w_1);
                 for(int r = 0; r < Nb; r++){
@@ -249,7 +253,7 @@ public class KeyExpansion {
     public static void main(String []  args){
 
         KeyExpansion ke = new KeyExpansion(128);
-        Hexa[][][] expanded_key = ke.KeyExpansionAlgo(StringToHexaArr("2B7E151628AED2A6ABf7158809CF4F3C", 4, 4));
+        Hexa[][][] expanded_key = ke.KeyExpansionAlgo(StringToHexaArr("00000000000000000000000000000000", 4, 4));
         displayExpandedKey(expanded_key, 11, 4, 4);
        /* System.out.println("Display before: ");
         Hexa[] hex = StringToHexa("7D5ACB46");
@@ -267,6 +271,7 @@ public class KeyExpansion {
         System.out.println("After XOR:");
         Hexa [] xor = XOR(rcj,StringToHexa("38497268"));
         displayHexWord(xor);*/
+        //2B7E151628AED2A6ABf7158809CF4F3C
     }
 
     private static void displayExpandedKey(Hexa[][][] expanded_key, int blocks, int rows, int cols) {

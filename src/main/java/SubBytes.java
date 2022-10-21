@@ -7,7 +7,7 @@ public class SubBytes {
         Hexa newWord = new Hexa();
         newWord.firstChar = sBoxVal[0];
         newWord.secondChar = sBoxVal[1];
-        System.out.println("First = "+newWord.firstChar+" Second = "+newWord.secondChar);
+        //System.out.println("First = "+newWord.firstChar+" Second = "+newWord.secondChar);
         return newWord;
     }
     public static Hexa [][] SubBytesEnc (Hexa [][] hexMat) {
@@ -25,8 +25,8 @@ public class SubBytes {
                 hex_mat_copy[i][j].secondChar = hexMat[i][j].secondChar;
             }
         }
-        System.out.println("Between Sub:");
-        displayHexMatrix(hex_mat_copy,4,4);
+        //System.out.println("Between Sub:");
+        //displayHexMatrix(hex_mat_copy,4,4);
 
 
         for (int i = 0; i < 4; i++) {
