@@ -64,22 +64,43 @@ public class AES {
 
         for (int round = 1; round <= Nr - 1; round++) {
             //Sub Bytes
+            System.out.println("ROUND 1:\n");
             state = SubBytes.SubBytesEnc(state);
+            System.out.println("Sub Bytes: ");
+            displayHexMatrix(state,Nb,Nb);
+
             //Shift Rows
             state = ShiftRows.shiftRows(state,Nb,Nb);
+            System.out.println("Shift Rows: ");
+            displayHexMatrix(state,Nb,Nb);
+
             //Mix Columns
             Hexa mix_mat [][] = MixColumns.StringToHexa(MixColumns.dec_matrix, 4,4);
             state = MixColumns.multiplyMatrices(mix_mat, state,Nb,Nb,Nb);
+            System.out.println("Mix Columns: ");
+            displayHexMatrix(state,Nb,Nb);
             //Add round Key
             state = AddRoundKey.addRoundkey(state,expanded_key,round,Nb);
+            System.out.println("Add Round Key: ");
+            displayHexMatrix(state,Nb,Nb);
 
         }
+        System.out.println("Final Round:");
+
         //Sub Bytes
         state = SubBytes.SubBytesEnc(state);
+        System.out.println("Sub Bytes: ");
+        displayHexMatrix(state,Nb,Nb);
+
         //Shift Rows
         state = ShiftRows.shiftRows(state,Nb,Nb);
+        System.out.println("Shift Rows: ");
+        displayHexMatrix(state,Nb,Nb);
+
         //Round Key
         state = AddRoundKey.addRoundkey(state,expanded_key,Nr,Nb);
+        System.out.println("Add Round Key: ");
+        displayHexMatrix(state,Nb,Nb);
 
         return state;
     }

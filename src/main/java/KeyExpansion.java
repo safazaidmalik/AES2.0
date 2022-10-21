@@ -206,6 +206,7 @@ public class KeyExpansion {
 
     public Hexa[][][] KeyExpansionAlgo(Hexa[][] orignalKey){
 
+        System.out.println("KEY EXPANSION:");
         Hexa [][][] expandedKey = new Hexa[(Nr+1)][Nb][Nb];
         int i = 0;
         expandedKey[i]= orignalKey;
@@ -245,10 +246,12 @@ public class KeyExpansion {
                 w_ = w_r;
             }
             i++;
-            System.out.println("Key after Round " + String.valueOf(i));
-            displayHexMatrix(expandedKey[i],4,4);
 
-        } // end while
+
+        }
+        System.out.println("Key after Round " + String.valueOf(i));
+        displayHexMatrix(expandedKey[i],4,4);
+        // end while
         return expandedKey;
     }
 
@@ -256,8 +259,8 @@ public class KeyExpansion {
 
     public static void main(String []  args){
 
-        KeyExpansion ke = new KeyExpansion(128);
-        Hexa[][][] expanded_key = ke.KeyExpansionAlgo(StringToHexaArr("2B7E151628AED2A6ABf7158809CF4F3C", 4, 4));
+        //KeyExpansion ke = new KeyExpansion(128);
+        //Hexa[][][] expanded_key = ke.KeyExpansionAlgo(StringToHexaArr("2B7E151628AED2A6ABf7158809CF4F3C", 4, 4));
         //displayExpandedKey(expanded_key, 11, 4, 4);
        /* System.out.println("Display before: ");
         Hexa[] hex = StringToHexa("7D5ACB46");
